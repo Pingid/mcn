@@ -51,3 +51,6 @@ Enable classes autocompletion using `cn` with Tailwind CSS.
    }
   ```
 </details>
+
+## License
+MIT © [Dan Beaven](https://github.com/Pingid)
