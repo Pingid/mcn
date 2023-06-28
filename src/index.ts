@@ -4,7 +4,7 @@ export type ClassNames =
   | null
   | undefined
   | boolean
-  | readonly [null | undefined | boolean, ClassNames, ClassNames?]
+  | readonly [null | undefined | boolean, string, string?]
   | { readonly [x: string]: null | undefined | boolean }
 
 type TypeofClassName<C> = C extends null | undefined | boolean
