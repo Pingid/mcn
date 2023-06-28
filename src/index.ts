@@ -22,13 +22,22 @@ type Join<T> = T extends [infer I, ...infer R] ? `${I & string} ${Join<R>}` : ''
 // -----------------------------------------------------------------
 // Join className variants
 // -----------------------------------------------------------------
-export const cn = <T extends ClassNames[]>(...args: T): Join<{ [K in keyof T]: TypeofClassName<T[K]> }> =>
-  args.reduce<any>((a, b) => {
-    if (typeof b === 'string') return (a + ' ' + b).trim()
-    if (Array.isArray(b)) return cn(a, b[0] ? b[1] : b[2])
-    if (!b) return a
-    if (typeof b === 'object') return cn(a, ...(Object.entries(b).map((x) => x.reverse()) as any[]))
-    return a
-  }, '')
+export const cn: <T extends ClassNames[]>(...args: T) => Join<{ [K in keyof T]: TypeofClassName<T[K]> }> =
+  function cn() {
+    let a = ''
+    for (let i = 0; i < arguments.length; i++) {
+      const b = arguments[i]
+      if (typeof b === 'string') a = a + ' ' + b
+      if (typeof b === 'object' && b !== null) {
+        if (Array.isArray(b)) a = a + ' ' + ((b[0] ? b[1] : b[2]) || '')
+        else {
+          for (let key in b) {
+            a = a + (b[key] ? ' ' + key : '')
+          }
+        }
+      }
+    }
+    return a.trim()
+  } as any
 
 export default cn
