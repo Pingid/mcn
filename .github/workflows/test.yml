@@ -10,14 +10,12 @@ jobs:
   run_tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          cache: 'yarn'
-          node-version: 18
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+
       - name: install dependencies
-        run: yarn install
+        run: bun install
       - name: transpile typescript
-        run: yarn build
+        run: bun run build
       - name: run tests
-        run: yarn test
+        run: bun test

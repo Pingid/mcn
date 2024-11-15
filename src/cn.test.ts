@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { cn } from './index'
+import { cn } from './index.js'
 
 it('should conditionally join strings', () => {
   expect(cn('one', null, undefined, 'two')).toBe('one two')

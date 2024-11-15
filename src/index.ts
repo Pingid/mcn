@@ -10,12 +10,12 @@ export type ClassNames =
 type TypeofClassName<C> = C extends null | undefined | boolean
   ? ''
   : C extends readonly [any, infer A]
-  ? TypeofClassName<A> | ''
-  : C extends readonly [any, infer A, infer B]
-  ? TypeofClassName<A> | TypeofClassName<B>
-  : C extends Record<string, any>
-  ? keyof C | ''
-  : C
+    ? TypeofClassName<A> | ''
+    : C extends readonly [any, infer A, infer B]
+      ? TypeofClassName<A> | TypeofClassName<B>
+      : C extends Record<string, any>
+        ? keyof C | ''
+        : C
 
 type Join<T> = T extends [infer I, ...infer R] ? `${I & string} ${Join<R>}` : ''
 

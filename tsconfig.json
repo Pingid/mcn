@@ -1,10 +1,21 @@
 {
   "compilerOptions": {
+    /* Language and Environment */
+    "target": "ESNext",
+
+    /* Modules */
+    "rootDir": "src" /* Specify the root folder within your source files. */,
+
+    /* Emit */
     "declaration": true /* Generate .d.ts files from TypeScript and JavaScript files in your project. */,
+    "declarationMap": true /* Create sourcemaps for d.ts files. */,
+    "sourceMap": true /* Create source map files for emitted JavaScript files. */,
+    "declarationDir": "lib/ts",
 
     /* Interop Constraints */
     "isolatedModules": true /* Ensure that each file can be safely transpiled without relying on other imports. */,
     "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
 
     /* Type Checking */
     "strict": true /* Enable all strict type-checking options. */,
@@ -13,6 +24,7 @@
     "strictFunctionTypes": true /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */,
     "strictBindCallApply": true /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */,
     "strictPropertyInitialization": true /* Check for class properties that are declared but not set in the constructor. */,
+    "strictBuiltinIteratorReturn": true /* Built-in iterators are instantiated with a 'TReturn' type of 'undefined' instead of 'any'. */,
     "noImplicitThis": true /* Enable error reporting when 'this' is given the type 'any'. */,
     "useUnknownInCatchVariables": true /* Default catch clause variables as 'unknown' instead of 'any'. */,
     "alwaysStrict": true /* Ensure 'use strict' is always emitted. */,
@@ -24,12 +36,10 @@
     "noUncheckedIndexedAccess": true /* Add 'undefined' to a type when accessed using an index. */,
     "noImplicitOverride": true /* Ensure overriding members in derived classes are marked with an override modifier. */,
     "noPropertyAccessFromIndexSignature": true /* Enforces using indexed accessors for keys declared using an indexed type. */,
-    "allowUnusedLabels": true /* Disable error reporting for unused labels. */,
-    "allowUnreachableCode": true /* Disable error reporting for unreachable code. */,
 
     /* Completeness */
-    "skipDefaultLibCheck": true /* Skip type checking .d.ts files that are included with TypeScript. */,
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "exclude": ["src/*.test.ts"]
+  "include": ["src/**/*"],
+  "exclude": ["**/*.test.ts"]
 }
