@@ -1,3 +1,29 @@
+function _cn() {
+  const classes: string[] = []
+  for (let i = 0, len = arguments.length; i < len; i++) {
+    const arg: any = arguments[i]
+    if (!arg) continue // skip falsy values immediately
+
+    const type = typeof arg
+    if (type === 'string') {
+      classes.push(arg)
+    } else if (type === 'object') {
+      if (Array.isArray(arg)) {
+        if (arg[0] && arg[1]) classes.push(arg[1])
+        else if (!arg[0] && arg[2]) classes.push(arg[2])
+      } else {
+        // using Object.keys() can sometimes be a tad faster than for-in
+        const keys = Object.keys(arg)
+        for (let j = 0, keyLen = keys.length; j < keyLen; j++) {
+          const key: any = keys[j]
+          if (arg[key]) classes.push(key)
+        }
+      }
+    }
+  }
+  return classes.join(' ')
+}
+
 export type ClassNames =
   | string
   | number
@@ -19,25 +45,31 @@ type TypeofClassName<C> = C extends null | undefined | boolean
 
 type Join<T> = T extends [infer I, ...infer R] ? `${I & string} ${Join<R>}` : ''
 
-// -----------------------------------------------------------------
-// Join className variants
-// -----------------------------------------------------------------
-export const cn: <T extends ClassNames[]>(...args: T) => Join<{ [K in keyof T]: TypeofClassName<T[K]> }> =
-  function cn() {
-    let a = ''
-    for (let i = 0; i < arguments.length; i++) {
-      const b = arguments[i]
-      if (typeof b === 'string') a = a + ' ' + b
-      if (typeof b === 'object' && b !== null) {
-        if (Array.isArray(b)) a = a + ' ' + ((b[0] ? b[1] : b[2]) || '')
-        else {
-          for (let key in b) {
-            a = a + (b[key] ? ' ' + key : '')
-          }
-        }
-      }
-    }
-    return a.trim()
-  } as any
+/**
+ * @deprecated This package is deprecated. Please use [@lickle/cn](https://github.com/Pingid/lickle-cn)
+ *
+ * Type-safe class name joiner function.
+ * Particularly useful when working with shared class names, as your IDE will display the actual
+ * resolved class when you hover over the variable.
+ *
+ * @example
+ * tcn('bg-blue', 'text-white', { 'hover:underline': true }) // "bg-blue text-white hover:underline"
+ *
+ * tcn('p-6', [darkMode, "text-white", "text-black"]) // Resolves based on darkMode condition
+ */
+export const tcn: <const T extends ClassNames[]>(...args: T) => Join<{ [K in keyof T]: TypeofClassName<T[K]> }> =
+  _cn as any
+
+/**
+ * @deprecated This package is deprecated. Please use [@lickle/cn](https://github.com/Pingid/lickle-cn)
+ *
+ * Generic class name joiner function.
+ *
+ * @example
+ * cn('bg-blue', 'text-white', { 'hover:underline': true }) // "bg-blue text-white hover:underline"
+ *
+ * cn('p-6', [darkMode, "text-white", "text-black"]) // Resolves based on darkMode condition
+ */
+export const cn: <T extends ClassNames[]>(...args: T) => string = _cn
 
 export default cn

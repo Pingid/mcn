@@ -1,6 +1,6 @@
 {
   "name": "mcn",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A tiny utility for conditionally joining classNames together.",
   "author": "Dan Beaven <dm.beaven@gmail.com>",
   "repository": {
